@@ -1,0 +1,15 @@
+global:
+  resolve_timeout: 5m
+
+route:
+  receiver: email-alert
+
+receivers:
+- name: email-alert
+  email_configs:
+  - to: juansuportaws@gmail.com
+    from: juansuporteaws@gmail.com
+    smarthost: smtp.gmail.com:587
+    auth_username: juansuportaws@gmail.com
+    auth_password: zuwu ndnd qvar ldae
+    require_tls: true

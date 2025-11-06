@@ -1,0 +1,11 @@
+groups:
+- name: site_status_alerts
+  rules:
+  - alert: SiteOffline
+    expr: site_status == 0
+    for: 5s
+    labels:
+      severity: critical
+    annotations:
+      summary: "Site fora do ar"
+      description: "O site {{ $labels.site }} está offline há mais de 5 segundos."

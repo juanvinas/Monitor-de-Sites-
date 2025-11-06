@@ -1,0 +1,6 @@
+[
+  { "nome": "Google", "url": "https://www.google.com" },
+  { "nome": "GitHub", "url": "https://www.github.com" },
+  { "nome": "StackOverflow", "url": "https://stackoverflow.com" },
+  { "nome": "MeuEstoque", "url": "http://meuprojetoestoque.duckdns.org:8080/" }
+]
