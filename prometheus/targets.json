@@ -1,0 +1,31 @@
+[
+  {
+    "targets": ["https://www.google.com"],
+    "labels": {
+      "projeto": "Monitoramento_Geral",
+      "nome": "Google"
+    }
+  },
+  {
+    "targets": ["https://github.com"],
+    "labels": {
+      "projeto": "Monitoramento_Geral",
+      "nome": "GitHub"
+    }
+  },
+  {
+    "targets": ["https://stackoverflow.com"],
+    "labels": {
+      "projeto": "Monitoramento_Geral",
+      "nome": "StackOverflow"
+    }
+  },
+  {
+    "targets": ["https://meuprojetoestoque.duckdns.org"],
+    "labels": {
+      "projeto": "Monitoramento_Geral",
+      "nome": "Meu Projeto Estoque"
+    }
+  }
+]
+

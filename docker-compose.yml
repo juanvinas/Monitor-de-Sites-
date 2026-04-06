@@ -9,6 +9,15 @@ services:
     networks:
       - monitor-net
 
+  blackbox-exporter:
+    image: prom/blackbox-exporter:latest
+    container_name: blackbox-exporter
+    restart: unless-stopped
+    ports:
+      - "9115:9115"
+    networks:
+      - monitor-net
+      
   prometheus:
     image: prom/prometheus
     container_name: prometheus
@@ -17,6 +26,7 @@ services:
     volumes:
       - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
       - ./prometheus/alert_rules.yml:/etc/prometheus/alert_rules.yml
+      - ./prometheus/targets.json:/etc/prometheus/targets.json
     networks:
       - monitor-net
 
