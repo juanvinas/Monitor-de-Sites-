@@ -1,0 +1,42 @@
+# Logs
+*.log
+*.out
+*.err
+
+# Arquivos temporários
+*.tmp
+*.swp
+*.swo
+*.bak
+
+# Configurações locais
+.env
+.env.*
+secrets.yml
+
+# Docker
+*.pid
+*.seed
+*.pid.lock
+docker-compose.override.yml
+
+# Prometheus
+prometheus/data/
+prometheus/targets.json
+
+# Grafana
+grafana/data/
+grafana/plugins/
+
+# Alertmanager
+alertmanager/data/
+
+# Arquivos do sistema
+.DS_Store
+Thumbs.db
+
+# Python (se usar scripts auxiliares)
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
