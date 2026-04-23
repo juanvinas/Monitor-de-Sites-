@@ -1,0 +1,22 @@
+groups:
+- name: site-monitoring
+  rules:
+  - alert: SiteOffline
+    expr: probe_success == 0
+    for: 1m
+    labels:
+      severity: critical
+    annotations:
+          summary: "Status do Site: {{ $labels.instance }}"
+          description: "O monitoramento do {{ $labels.nome }} está fora do ar"
+
+#- name: test-alerts
+#  rules:
+#  - alert: TestEmail
+#    expr: vector(1)
+#    for: 10s
+#    labels:
+#      severity: test
+#    annotations:
+#      summary: "Teste de envio de e-mail"
+#      description: "Este é apenas um alerta de teste para validar o envio"

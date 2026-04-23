@@ -1,12 +1,26 @@
 global:
-  resolve_timeout: 5m
+  resolve_timeout: 1m
+  smtp_smarthost: 'smtp.gmail.com:587'
+  smtp_from: '${EMAIL_REMETENTE}'
+  smtp_auth_username: '${EMAIL_REMETENTE}'
+  smtp_auth_password: '${SENHA_EMAIL}'
+
 route:
   group_by: ['alertname']
-  group_wait: 10s
+  group_wait: 5s
   group_interval: 10s
   repeat_interval: 1h
-  receiver: 'web.hook'
+  receiver: 'email-alerts'
+
 receivers:
-  - name: 'web.hook'
-    webhook_configs:
-      - url: 'http://127.0.0.1:5001/'
+- name: 'email-alerts'
+  email_configs:
+  - to: 'jpablonunesvinas@gmail.com'
+    send_resolved: true   # também envia quando o alerta é resolvido
+
+inhibit_rules:
+- source_match:
+    severity: 'critical'
+  target_match:
+    severity: 'warning'
+  equal: ['alertname', 'instance']

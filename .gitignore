@@ -27,6 +27,9 @@ prometheus/targets.json
 # Grafana
 grafana/data/
 grafana/plugins/
+grafana/config/grafana.ini
+alertmanager/alertmanager.yml
+
 
 # Alertmanager
 alertmanager/data/

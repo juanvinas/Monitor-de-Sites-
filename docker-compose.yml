@@ -35,10 +35,20 @@ services:
     container_name: alertmanager
     ports:
       - "9093:9093"
+    env_file:
+      - .env
     volumes:
-      - ./alertmanager/alertmanager.yml:/etc/alertmanager/alertmanager.yml
+      # Montamos seu arquivo local como template
+      - ./alertmanager/alertmanager.yml:/etc/alertmanager/alertmanager.template.yml
     networks:
       - monitor-net
+    # O entrypoint abaixo ativa a substituição das variáveis do .env para o arquivo final
+    entrypoint:
+      - /bin/sh
+      - -c
+      - |
+        sed "s/\$${EMAIL_REMETENTE}/$${EMAIL_REMETENTE}/g; s/\$${SENHA_EMAIL}/$${SENHA_EMAIL}/g" /etc/alertmanager/alertmanager.template.yml > /etc/alertmanager/alertmanager.yml
+        /bin/alertmanager --config.file=/etc/alertmanager/alertmanager.yml --storage.path=/alertmanager
 
   grafana:
     image: grafana/grafana
