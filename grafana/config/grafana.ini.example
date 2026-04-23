@@ -1,0 +1,11 @@
+[smtp]
+enabled = true
+host = smtp.gmail.com:587
+user = E-MAIL_AQUI
+password = SENHA_AQUI
+from_address = E-MAIL_AQUI
+
+[auth.anonymous]
+enabled = true
+org_name = Main Org.
+org_role = Viewer
