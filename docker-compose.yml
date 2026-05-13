@@ -8,6 +8,11 @@ services:
       - "3000:3000"
     networks:
       - monitor-net
+    logging: &default-logging
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
 
   blackbox-exporter:
     image: prom/blackbox-exporter:latest
@@ -17,18 +22,25 @@ services:
       - "9115:9115"
     networks:
       - monitor-net
+    logging: *default-logging
       
   prometheus:
     image: prom/prometheus
     container_name: prometheus
     ports:
       - "9090:9090"
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--storage.tsdb.retention.size=20GB' # <--- A TRAVA DE SEGURANÇA AQUI
     volumes:
       - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
       - ./prometheus/alert_rules.yml:/etc/prometheus/alert_rules.yml
       - ./prometheus/targets.json:/etc/prometheus/targets.json
+      - prometheus-data:/prometheus # <--- VOLUME PARA NÃO PERDER DADOS
     networks:
       - monitor-net
+    logging: *default-logging
 
   alertmanager:
     image: prom/alertmanager
@@ -38,17 +50,16 @@ services:
     env_file:
       - .env
     volumes:
-      # Montamos seu arquivo local como template
       - ./alertmanager/alertmanager.yml:/etc/alertmanager/alertmanager.template.yml
     networks:
       - monitor-net
-    # O entrypoint abaixo ativa a substituição das variáveis do .env para o arquivo final
     entrypoint:
       - /bin/sh
       - -c
       - |
         sed "s/\$${EMAIL_REMETENTE}/$${EMAIL_REMETENTE}/g; s/\$${SENHA_EMAIL}/$${SENHA_EMAIL}/g" /etc/alertmanager/alertmanager.template.yml > /etc/alertmanager/alertmanager.yml
         /bin/alertmanager --config.file=/etc/alertmanager/alertmanager.yml --storage.path=/alertmanager
+    logging: *default-logging
 
   grafana:
     image: grafana/grafana
@@ -61,6 +72,7 @@ services:
       - grafana-storage:/var/lib/grafana
     networks:
       - monitor-net
+    logging: *default-logging
 
 networks:
   monitor-net:
@@ -68,3 +80,5 @@ networks:
 
 volumes:
   grafana-storage:
+  prometheus-data: # Define o volume do Prometheus
+  
