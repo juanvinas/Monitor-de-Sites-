@@ -6,7 +6,7 @@ Este projeto demonstra a implementação de uma infraestrutura de observabilidad
 
 O dashboard está configurado com **Acesso Anônimo (Viewer)** e modo **Kiosk**, permitindo que qualquer pessoa visualize as métricas em tempo real sem a necessidade de login.
 
-> 🌐 **[Clique aqui para visualizar o Dashboard ao Vivo](http://34.24.124.21:3001/d/adsdtgk/monitor-sites?orgId=1&refresh=1m&kiosk=true&from=now-6h&to=now&timezone=browser)**
+> 🌐 **[Clique aqui para visualizar o Dashboard ao Vivo](http://163.176.246.245:3001/d/xtkCtBkiz/prometheus-blackbox-exporter?var-interval=10s&orgId=1&from=now-1h&to=now&timezone=browser&var-target=$__all&refresh=10s&kiosk=true)**
 
 ---
 
